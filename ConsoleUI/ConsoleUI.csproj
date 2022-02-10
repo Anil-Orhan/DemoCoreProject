@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Core.Bussines\Demo.Core.Bussines.csproj" />
+    <ProjectReference Include="..\Demo.Core.Dal\Demo.Core.Dal.csproj" />
+    <ProjectReference Include="..\Demo.Core.Entities\Demo.Core.Entities.csproj" />
+    <ProjectReference Include="..\Demo.Core.MvcUI\Demo.Core.MvcUI.csproj" />
+    <ProjectReference Include="..\Demo.Core\Demo.Core.csproj" />
+  </ItemGroup>
+
+</Project>

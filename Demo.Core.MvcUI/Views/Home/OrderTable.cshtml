@@ -1,0 +1,36 @@
+﻿@model List<Demo.Core.Entities.Concrete.Order>
+
+    
+<div class="container mt-3">
+    <h1 style="color: aliceblue">Order Table</h1>
+              
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th>OrderID</th>
+            <th>EmployeeID</th>
+            <th>CustomerID</th>
+            <th>OrderDate</th>
+            <th>ShipName</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.ToList())
+        {
+
+            <tr>
+                <td>@item.OrderID</td>
+                <td>@item.EmployeeID</td>
+                <td>@item.CustomerID</td>
+                <td>@item.OrderDate</td>
+                <td>@item.ShipName</td>
+
+
+            </tr>
+
+        }
+       
+
+        </tbody>
+    </table>
+</div>
