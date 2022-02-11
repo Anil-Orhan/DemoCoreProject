@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Demo.Core.Entities.Concrete
 {
-    public class OrderDatails:IEntity
+    public class OrderDetails:IEntity
     {
         [Key]
         [Required]

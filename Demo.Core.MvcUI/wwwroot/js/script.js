@@ -1,3 +1,5 @@
+
+
 "use strict";
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -323,97 +325,97 @@ document.addEventListener('DOMContentLoaded', function () {
 
       return gradient;
     }
-    /* Visitors chart */
+      var ctx = document.getElementById('myChart');
 
-
-    var ctx = document.getElementById('myChart');
-
-    if (ctx) {
-      var myCanvas = ctx.getContext('2d');
-      var myChart = new Chart(myCanvas, {
-        type: 'line',
-        data: {
-          labels: ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-          datasets: [{
-            label: 'Last 6 months',
-            data: [35, 27, 40, 15, 30, 25, 45],
-            cubicInterpolationMode: 'monotone',
-            tension: 0.4,
-            backgroundColor: ['rgba(95, 46, 234, 1)'],
-            borderColor: ['rgba(95, 46, 234, 1)'],
-            borderWidth: 2
-          }, {
-            label: 'Previous',
-            data: [20, 36, 16, 45, 29, 32, 10],
-            cubicInterpolationMode: 'monotone',
-            tension: 0.4,
-            backgroundColor: ['rgba(75, 222, 151, 1)'],
-            borderColor: ['rgba(75, 222, 151, 1)'],
-            borderWidth: 2
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              min: 0,
-              max: 100,
-              ticks: {
-                stepSize: 25
+      if (ctx) {
+         
+          var myCanvas = ctx.getContext('2d');
+          var myChart = new Chart(myCanvas, {
+              type: 'line',
+              data: {
+                  labels: ['Nancy', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                  datasets: [{
+                      label: 'Last 6 months',
+                      data: [100, 30, 40, 99, 30, 25, 45,],
+                      cubicInterpolationMode: 'monotone',
+                      tension: 0.4,
+                      backgroundColor: ['rgba(95, 46, 234, 1)'],
+                      borderColor: ['rgba(95, 46, 234, 1)'],
+                      borderWidth: 2
+                  }, {
+                      label: 'Previous',
+                      data: [20, 36, 16, 45, 29, 32, 10],
+                      cubicInterpolationMode: 'monotone',
+                      tension: 0.4,
+                      backgroundColor: ['rgba(75, 222, 151, 1)'],
+                      borderColor: ['rgba(75, 222, 151, 1)'],
+                      borderWidth: 2
+                  }]
               },
-              grid: {
-                display: false
+              options: {
+                  scales: {
+                      y: {
+                          min: 0,
+                          max: 100,
+                          ticks: {
+                              stepSize: 25
+                          },
+                          grid: {
+                              display: false
+                          }
+                      },
+                      x: {
+                          grid: {
+                              color: gridLine
+                          }
+                      }
+                  },
+                  elements: {
+                      point: {
+                          radius: 2
+                      }
+                  },
+                  plugins: {
+                      legend: {
+                          position: 'top',
+                          align: 'end',
+                          labels: {
+                              boxWidth: 8,
+                              boxHeight: 8,
+                              usePointStyle: true,
+                              font: {
+                                  size: 12,
+                                  weight: '500'
+                              }
+                          }
+                      },
+                      title: {
+                          display: true,
+                          text: ['Visitor statistics', 'Nov - July'],
+                          align: 'start',
+                          color: '#171717',
+                          font: {
+                              size: 16,
+                              family: 'Inter',
+                              weight: '600',
+                              lineHeight: 1.4
+                          }
+                      }
+                  },
+                  tooltips: {
+                      mode: 'index',
+                      intersect: false
+                  },
+                  hover: {
+                      mode: 'nearest',
+                      intersect: true
+                  }
               }
-            },
-            x: {
-              grid: {
-                color: gridLine
-              }
-            }
-          },
-          elements: {
-            point: {
-              radius: 2
-            }
-          },
-          plugins: {
-            legend: {
-              position: 'top',
-              align: 'end',
-              labels: {
-                boxWidth: 8,
-                boxHeight: 8,
-                usePointStyle: true,
-                font: {
-                  size: 12,
-                  weight: '500'
-                }
-              }
-            },
-            title: {
-              display: true,
-              text: ['Visitor statistics', 'Nov - July'],
-              align: 'start',
-              color: '#171717',
-              font: {
-                size: 16,
-                family: 'Inter',
-                weight: '600',
-                lineHeight: 1.4
-              }
-            }
-          },
-          tooltips: {
-            mode: 'index',
-            intersect: false
-          },
-          hover: {
-            mode: 'nearest',
-            intersect: true
-          }
-        }
-      });
-      charts.visitors = myChart;
-    }
+          });
+          charts.visitors = myChart;
+      }
+
+
     /* Customers chart */
 
 
@@ -517,4 +519,33 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   addData();
+});
+
+new Chart(document.getElementById("horizontalBar"), {
+    "type": "horizontalBar",
+    "data": {
+        "labels": ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey"],
+        "datasets": [{
+            "label": "My First Dataset",
+            "data": [22, 33, 55, 12, 86, 23, 14],
+            "fill": false,
+            "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)",
+                "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"
+            ],
+            "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
+                "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"
+            ],
+            "borderWidth": 1
+        }]
+    },
+    "options": {
+        "scales": {
+            "xAxes": [{
+                "ticks": {
+                    "beginAtZero": true
+                }
+            }]
+        }
+    }
 });

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Demo.Core.Dal.Abstract
 {
-   public interface IOrderDetailsDal : IEntityRepository<OrderDatails>
+   public interface IOrderDetailsDal : IEntityRepository<OrderDetails>
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<Demo.Core.Entities.DTO.EmployeeSalesReport>
+﻿@model List<Demo.Core.Entities.DTO.ProductReport>
 
 
     <div class="container mt-3" >
@@ -6,11 +6,11 @@
         <table style="color: azure; text-align: center" class="table table-bordered table-hover table-dark">
             <thead>
             <tr>
-                <th>Employee ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Order Amounth</th>
-                <th>Total Sale</th>
+                <th>ProductID</th>
+                <th>ProductName</th>
+                <th>OrderAmounth</th>
+                <th>ProductAmounth</th>
+                
             </tr>
             </thead>
             <tbody>
@@ -20,11 +20,11 @@
             {<tr >
 
 
-                 <td>@item.EmployeeID</td>
-                 <td>@item.FirstName</td>
-                 <td>@item.LastName</td>
+                 <td>@item.ProductID</td>
+                 <td>@item.ProductName</td>
                  <td>@item.OrderAmounth</td>
-                 <td>@Convert.ToInt32(item.TotalSale) $</td>
+                 <td>@item.ProductAmounth</td>
+                
              </tr>
             }
                

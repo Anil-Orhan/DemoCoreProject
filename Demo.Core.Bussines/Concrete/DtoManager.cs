@@ -12,6 +12,9 @@ namespace Demo.Core.Bussines.Concrete
 {
     public class DtoManager:IDtoService
     {
+        OrderManager orderManager = new OrderManager(new EfOrderDal());
+        OrderDetailManager orderDetailManager = new OrderDetailManager(new EfOrderDetailsDal());
+        ProductManager productManager = new ProductManager(new EfProductDal());
 
         public List<EmployeeSalesReport> GetEmployeesReports()
         {
@@ -26,8 +29,7 @@ namespace Demo.Core.Bussines.Concrete
         }
         public EmployeeSalesReport EmployeeSaleReport(Employee employee)
         {
-            OrderManager orderManager = new OrderManager(new EfOrderDal());
-            OrderDetailManager orderDetailManager = new OrderDetailManager(new EfOrderDetailsDal());
+          
             EmployeeManager employeeManager = new EmployeeManager(new EfEmployeeDal());
 
             var resultOrders = orderManager.GetAll().Where(p=>p.EmployeeID==employee.EmployeeID); // Seçilen Çalışanın Tüm Siparişleri
@@ -53,6 +55,45 @@ namespace Demo.Core.Bussines.Concrete
 
         }
 
+
+        public List<ProductReport> ProductSaleReport()
+        {
+            
+
+            List<ProductReport> productReport = new List<ProductReport>();
+
+
+
+
+
+            foreach (var item in productManager.GetAll())
+            {
+
+                productReport.Add(
+                    
+                    new ProductReport
+                    {
+                        ProductID = item.ProductID,
+                        ProductName = item.ProductName,
+                        OrderAmounth = orderDetailManager.GetAll().Where(i=>i.ProductID==item.ProductID).Count(),
+                        ProductAmounth = orderDetailManager.GetAll().Where(i => i.ProductID == item.ProductID).Sum(i=>i.Quantity)
+
+
+
+                    }
+                    
+                    
+                    );
+
+
+            }
+
+
+            return productReport;
+
+
+
+        }
 
 
     }

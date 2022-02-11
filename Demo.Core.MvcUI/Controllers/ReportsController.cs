@@ -7,11 +7,22 @@ namespace Demo.Core.MvcUI.Controllers
 {
     public class ReportsController : Controller
     {
+        DtoManager dtoManager = new DtoManager();
         public IActionResult EmployeeSaleReport()
         {
-            DtoManager dtoManager = new DtoManager();
+           
             
             var result = dtoManager.GetEmployeesReports();
+
+
+            return View(result);
+        }
+
+        public IActionResult ProductReport()
+        {
+           
+
+            var result = dtoManager.ProductSaleReport();
 
 
             return View(result);

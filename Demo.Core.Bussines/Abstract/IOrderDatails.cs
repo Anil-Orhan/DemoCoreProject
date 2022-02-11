@@ -7,12 +7,12 @@ namespace Demo.Core.Bussines.Abstract
 {
     public interface IOrderDatails
     {
-        OrderDatails GetById(int orderDetailId);
-        List<OrderDatails> GetAll();
+        OrderDetails GetById(int orderDetailId);
+        List<OrderDetails> GetAll();
 
-        void Add(OrderDatails orderDatails);
-        void Delete(OrderDatails orderDatails);
-        void Update(OrderDatails orderDatails);
+        void Add(OrderDetails orderDatails);
+        void Delete(OrderDetails orderDatails);
+        void Update(OrderDetails orderDatails);
 
     }
 }

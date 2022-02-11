@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Demo.Core.Dal.Concrete
 {
-    internal class EfCategoryDal : EfEntityRepositoryBase<Categories, NorthwindContext>, ICategoryDal
+    public class EfCategoryDal : EfEntityRepositoryBase<Categories, NorthwindContext>, ICategoryDal
     {
   
     }

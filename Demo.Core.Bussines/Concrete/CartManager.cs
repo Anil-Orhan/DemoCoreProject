@@ -9,7 +9,7 @@ namespace Demo.Core.Bussines.Concrete
 {
     public class CartManager : ICartService
     {
-        List<OrderDatails> _od=new List<OrderDatails>();
+        List<OrderDetails> _od=new List<OrderDetails>();
         public void AddToCart(Cart cart, Products product)
         {
             CartLine cartLine = cart.CartLine.FirstOrDefault(x => x.Product.ProductID == product.ProductID);
@@ -29,7 +29,7 @@ namespace Demo.Core.Bussines.Concrete
             {
                 foreach (var item in cart.CartLine)
                 {
-                    OrderDatails orderDatails = new OrderDatails();
+                    OrderDetails orderDatails = new OrderDetails();
                     orderDatails.ProductID = item.Product.ProductID;
                     orderDatails.Quantity = item.Quantity;
                     orderDatails.UnitPrice = item.Product.UnitPrice;

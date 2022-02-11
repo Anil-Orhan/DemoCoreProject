@@ -14,6 +14,7 @@ using Demo.Core.Bussines.Abstract;
 using Demo.Core.Bussines.Concrete;
 using Demo.Core.Dal.Abstract;
 
+
 namespace Demo.Core.MvcUI
 {
     public class Startup
@@ -30,6 +31,7 @@ namespace Demo.Core.MvcUI
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
+           
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;

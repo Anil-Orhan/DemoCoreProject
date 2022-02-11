@@ -18,27 +18,27 @@ namespace Demo.Core.Bussines.Concrete
         }
 
 
-        public void Add(OrderDatails orderDatails)
+        public void Add(OrderDetails orderDatails)
         {
             _orderDal.Add(orderDatails);
         }
 
-        public void Delete(OrderDatails orderDatails)
+        public void Delete(OrderDetails orderDatails)
         {
             _orderDal.Delete(orderDatails);  
         }
 
-        public List<OrderDatails> GetAll()
+        public List<OrderDetails> GetAll()
         {
           return _orderDal.GetList();   
         }
 
-        public OrderDatails GetById(int orderDetailId)
+        public OrderDetails GetById(int orderDetailId)
         {
             return _orderDal.Get(p=>p.OrderID==orderDetailId);
         }
 
-        public void Update(OrderDatails orderDatails)
+        public void Update(OrderDetails orderDatails)
         {
             _orderDal.Update(orderDatails);
         }

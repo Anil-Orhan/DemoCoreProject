@@ -1,4 +1,33 @@
-﻿<main class="main users chart-page" id="skip-target">
+﻿@using System.Collections
+@using Demo.Core.Bussines.Concrete
+@using Demo.Core.Entities.Concrete
+@using Demo.Core.MvcUI.Data
+@using Remotion.Linq.Parsing.Structure.IntermediateModel
+@model Demo.Core.MvcUI.Model.OrderInfo
+
+
+
+
+@{
+    List<string> employeenames = new List<string>();
+
+    foreach (var item in Model.Employee)
+    {
+        employeenames.Add(item.FirstName+" "+item.LastName);
+    }
+
+}
+
+<script>
+ /* Visitors chart */
+   
+
+    
+
+
+</script>
+
+<main class="main users chart-page" id="skip-target">
       <div class="container">
         <h2 class="main-title">Dashboard</h2>
         <div class="row stat-cards">
@@ -7,16 +36,21 @@
               <div class="stat-cards-icon primary">
                 <i data-feather="bar-chart-2" aria-hidden="true"></i>
               </div>
-              <div class="stat-cards-info">
-                <p class="stat-cards-info__num">1478 286</p>
-                <p class="stat-cards-info__title">Total visits</p>
-                <p class="stat-cards-info__progress">
-                  <span class="stat-cards-info__profit success">
-                    <i data-feather="trending-up" aria-hidden="true"></i>4.07%
-                  </span>
-                  Last month
-                </p>
-              </div>
+                <div class="stat-cards-info">
+                    @{decimal totalprice = 0; }
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        totalprice += item.UnitPrice*item.Quantity;
+                    }
+                    <p class="stat-cards-info__num"> @Convert.ToInt32(totalprice)$ </p>
+                    <p class="stat-cards-info__title">Total Sale</p>
+                    <p class="stat-cards-info__progress">
+                        <span class="stat-cards-info__profit success">
+                            <i data-feather="trending-up" aria-hidden="true"></i>4.07%
+                        </span>
+                        Last month
+                    </p>
+                </div>
             </article>
           </div>
           <div class="col-md-6 col-xl-3">
@@ -25,8 +59,9 @@
                 <i data-feather="file" aria-hidden="true"></i>
               </div>
               <div class="stat-cards-info">
-                <p class="stat-cards-info__num">1478 286</p>
-                <p class="stat-cards-info__title">Total visits</p>
+                <p class="stat-cards-info__num">@Model.OrderDetails.Count</p>
+                <p class="stat-cards-info__title">
+                    Amounth of Order</p>
                 <p class="stat-cards-info__progress">
                   <span class="stat-cards-info__profit success">
                     <i data-feather="trending-up" aria-hidden="true"></i>0.24%
@@ -41,16 +76,22 @@
               <div class="stat-cards-icon purple">
                 <i data-feather="file" aria-hidden="true"></i>
               </div>
-              <div class="stat-cards-info">
-                <p class="stat-cards-info__num">1478 286</p>
-                <p class="stat-cards-info__title">Total visits</p>
-                <p class="stat-cards-info__progress">
-                  <span class="stat-cards-info__profit danger">
-                    <i data-feather="trending-down" aria-hidden="true"></i>1.64%
-                  </span>
-                  Last month
-                </p>
-              </div>
+                <div class="stat-cards-info">
+                    @{ int totalproduct = 0;}
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        totalproduct += item.Quantity;
+
+                    }
+                    <p class="stat-cards-info__num">@totalproduct</p>
+                    <p class="stat-cards-info__title">Amount of Products Sold</p>
+                    <p class="stat-cards-info__progress">
+                        <span class="stat-cards-info__profit danger">
+                            <i data-feather="trending-down" aria-hidden="true"></i>1.64%
+                        </span>
+                        Last month
+                    </p>
+                </div>
             </article>
           </div>
           <div class="col-md-6 col-xl-3">
@@ -58,16 +99,21 @@
               <div class="stat-cards-icon success">
                 <i data-feather="feather" aria-hidden="true"></i>
               </div>
-              <div class="stat-cards-info">
-                <p class="stat-cards-info__num">1478 286</p>
-                <p class="stat-cards-info__title">Total visits</p>
-                <p class="stat-cards-info__progress">
-                  <span class="stat-cards-info__profit warning">
-                    <i data-feather="trending-up" aria-hidden="true"></i>0.00%
-                  </span>
-                  Last month
-                </p>
-              </div>
+                <div class="stat-cards-info">
+                    @{ decimal totaldiscount = 0;}
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        totaldiscount += (item.Quantity * item.UnitPrice)*(decimal) item.Discount ;
+                    }
+                    <p class="stat-cards-info__num">@Convert.ToInt32(totaldiscount) $</p>
+                    <p class="stat-cards-info__title">Total Discount</p>
+                    <p class="stat-cards-info__progress">
+                        <span class="stat-cards-info__profit warning">
+                            <i data-feather="trending-up" aria-hidden="true"></i>0.00%
+                        </span>
+                        Last month
+                    </p>
+                </div>
             </article>
           </div>
         </div>
@@ -82,88 +128,85 @@
                   <tr class="users-table-info">
                     <th>
                       <label class="users-table__checkbox ms-20">
-                        <input type="checkbox" class="check-all">Thumbnail
+                        <input type="checkbox" class="check-all">Order ID
                       </label>
                     </th>
                     <th>Title</th>
-                    <th>Author</th>
-                    <th>Status</th>
+                    <th>Employee</th>
+                    
                     <th>Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="~/images/categories/01.webp"type="image/webp"><img src="./images/categories/01.jpg" alt="category"></picture>
-                        </div>
-                      </label>
-                    </td>
-                    <td>
-                      Starting your traveling blog with Vasco
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="~/images/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./images/avatar/avatar-illustrated-01.png" alt="User Name"></picture>
-                        Jenny Wilson
-                      </div>
-                    </td>
-                    <td><span class="badge-pending">Pending</span></td>
-                    <td>17.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="~/images/categories/02.webp" type="image/webp"><img src="./images/categories/02.jpg" alt="category"></picture>
-                        </div>
-                      </label>
-                    </td>
-                    <td>
-                      Start a blog to reach your creative peak
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="~/images/avatar/avatar-face-02.webp" type="image/webp"><img src="./images/avatar/avatar-face-02.png" alt="User Name"></picture>
-                        Annette Black
-                      </div>
-                    </td>
-                    <td><span class="badge-pending">Pending</span></td>
-                    <td>23.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
-                  </tr>
+                @{ int count = 0;}
+                @foreach (var item in Model.OrderDetails.OrderByDescending(p => p.Quantity))
+                {
+
+                    if (@count < 10)
+                    {
+                        <tr>
+                            <td>
+                                <label class="users-table__checkbox">
+                                    <input type="checkbox" class="check">
+                                    <div class="categories-table-img">
+                                        <p>@item.OrderID</p>
+                                    </div>
+                                </label>
+                            </td>
+                            <td>
+                                 @item.Quantity of the @item.ProductID (ID) product have been sold. @item.Discount % discount has been applied.
+
+                            </td>
+                            <td>
+                                <div class="pages-table-img">
+                                    
+                                    <picture><source srcset="~/images/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./images/avatar/avatar-illustrated-01.png" alt="User Name"></picture>
+
+                                </div>
+                                @{
+                                    var selectedEmployee = @Model.Employee.FirstOrDefault(p => p.EmployeeID == Model.Order.SingleOrDefault(e => e.OrderID == item.OrderID).EmployeeID);
+                               }
+                                <p>
+                                        
+                                    @selectedEmployee.FirstName @selectedEmployee.LastName
+                                    </p>
+                            </td>
+                            
+                            @{
+                                var orderDate = @Model.Order.FirstOrDefault(p => p.OrderID == item.OrderID).OrderDate;
+                            }
+                            <td>@orderDate.Day/@orderDate.Month/@orderDate.Year</td>
+                            <td>
+                                <span class="p-relative">
+                                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                                        <div class="sr-only">More info</div>
+                                        <i data-feather="more-horizontal" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="users-item-dropdown dropdown">
+                                        <li><a href="##">Edit</a></li>
+                                        <li><a href="##">Quick edit</a></li>
+                                        <li><a href="##">Trash</a></li>
+                                    </ul>
+                                </span>
+                            </td>
+                        </tr>
+
+                        count++;
+                    }
+
+                }
+
+                {
+                    
+
+
+                }
                 
-                
-                 
+
+
+
+
                 </tbody>
               </table>
             </div>
@@ -176,92 +219,41 @@
               <picture><source srcset="./img/svg/customers.svg" type="image/webp"><img src="./img/svg/customers.svg" alt=""></picture> -->
             </article>
             <article class="white-block">
-              <div class="top-cat-title">
-                <h3>Top categories</h3>
-                <p>28 Categories, 1400 Posts</p>
-              </div>
-              <ul class="top-cat-list">
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Lifestyle <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Dailiy lifestyle articles <span class="purple">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Tutorials <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Coding tutorials <span class="blue">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Technology <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Dailiy technology articles <span class="danger">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      UX design <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      UX design tips <span class="success">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Interaction tips <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Interaction articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      App development <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Mobile development articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Nature <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Wildlife animal articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Geography <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Geography articles <span class="primary">+472</span>
-                    </div>
-                  </a>
-                </li>
-              </ul>
+                <div class="top-cat-title">
+               
+                    <h3>Top categories</h3>
+                    <p> Products</p>
+                </div>
+                <ul class="top-cat-list">
+                    @{
+                        DtoManager dtoManager = new DtoManager();
+                        int count2 = 0;
+                       
+                            foreach (var item in dtoManager.ProductSaleReport().OrderByDescending(i=>i.ProductAmounth))
+                            { 
+                                if (count2<10)
+                                 {
+                                     <li>
+                                         <a href="##">
+                                             <div class="top-cat-list__title">
+                                                 Product Name :  @item.ProductName   <span> @item.ProductAmounth Product Sold!  </span>
+                                             </div>
+                                             <div class="top-cat-list__subtitle">
+                                                 Dailiy lifestyle articles <span class="purple">+472</span>
+                                             </div>
+                                         </a>
+                                     </li>
+                                 }
+                                count2++;
+                            }
+                          
+                        
+                       
+
+                    }
+                   
+
+                </ul>
             </article>
           </div>
         </div>

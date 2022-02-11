@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Demo.Core.Dal.Concrete
 {
-   public class EfOrderDetailsDal: EfEntityRepositoryBase<OrderDatails, NorthwindContext>, IOrderDetailsDal
+   public class EfOrderDetailsDal: EfEntityRepositoryBase<OrderDetails, NorthwindContext>, IOrderDetailsDal
     {
        
     }

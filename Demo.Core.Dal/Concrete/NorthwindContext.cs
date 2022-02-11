@@ -23,14 +23,14 @@ namespace Demo.Core.Dal.Concrete
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public DbSet<OrderDatails> OrderDatails { get; set; }
+        public DbSet<OrderDetails> OrderDatails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Configure default schema
             //modelBuilder.HasDefaultSchema("Admin");
 
             //Map entity to table
-            modelBuilder.Entity<OrderDatails>().ToTable("Order Details");
+            modelBuilder.Entity<OrderDetails>().ToTable("Order Details");
 
         }
 
